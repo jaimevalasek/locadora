@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Locadora extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'nome_fantasia',
+        'razao_social',
+        'cnpj',
+        'email',
+        'telefone',
+        'cidade',
+        'estado',
+    ];
 }

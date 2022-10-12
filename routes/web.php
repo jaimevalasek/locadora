@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\LocadoraController;
+use App\Http\Controllers\ModeloController;
+use App\Http\Controllers\MontadoraController;
+use App\Http\Controllers\VeiculoController;
+use App\Http\Controllers\VeiculoLogController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +21,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('locadoras', LocadoraController::class)
+    ->only('index', 'show', 'edit', 'store');
+
+Route::resource('montadoras', MontadoraController::class)
+    ->only('index', 'show', 'store');
+
+Route::resource('veiculos', VeiculoController::class)
+    ->only('index', 'show', 'edit', 'store');
+
+Route::resource('modelos', ModeloController::class)
+    ->only('index', 'show', 'edit', 'store');  
+    
+Route::resource('veiculo-logs', VeiculoLogController::class)
+    ->only('index', 'store');

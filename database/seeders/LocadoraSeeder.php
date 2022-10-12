@@ -18,7 +18,7 @@ class LocadoraSeeder extends Seeder
         Locadora::create([
             'nome_fantasia' => 'Unidas Aluguel de Carros',
             'razao_social' => 'Unidas Aluguel LTDA',
-            'cnpj' => '61.322.618/0001-62',
+            'cnpj' => fake()->numerify('##.###.###/0001-##'),
             'email' => fake()->email(),
             'telefone' => fake()->numerify('(##) #####-####'),
             'cidade' => 'Curitiba',
@@ -28,7 +28,7 @@ class LocadoraSeeder extends Seeder
         Locadora::create([
             'nome_fantasia' => 'Localiza Aluguel de Carros',
             'razao_social' => 'Localiza Aluguel LTDA',
-            'cnpj' => '85.955.191/0001-06',
+            'cnpj' => fake()->numerify('##.###.###/0001-##'),
             'email' => fake()->email(),
             'telefone' => fake()->numerify('(##) #####-####'),
             'cidade' => 'São Paulo',
@@ -38,7 +38,7 @@ class LocadoraSeeder extends Seeder
         Locadora::create([
             'nome_fantasia' => 'Movida Aluguel de Carros',
             'razao_social' => 'Movida Aluguel LTDA',
-            'cnpj' => '27.112.174/0001-00',
+            'cnpj' => fake()->numerify('##.###.###/0001-##'),
             'email' => fake()->email(),
             'telefone' => fake()->numerify('(##) #####-####'),
             'cidade' => 'Rio de Janeiro',

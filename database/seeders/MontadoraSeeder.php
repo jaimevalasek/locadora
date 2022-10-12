@@ -69,7 +69,7 @@ class MontadoraSeeder extends Seeder
         ]);
 
         $montadora = Montadora::create([
-            'nome' => 'Volkesvagem'
+            'nome' => 'Volkswagen'
         ]);
 
         $modelo = Modelo::create([
@@ -80,7 +80,7 @@ class MontadoraSeeder extends Seeder
         Veiculo::create([
             'numero_portas' => 2,
             'cor' => 'Branco',
-            'fabricante' => 'Volkesvagem',
+            'fabricante' => 'Volkswagen',
             'ano_modelo' => 2021,
             'ano_fabricacao' => 2021,
             'placa' => strtoupper(fake()->bothify('???-#?##')),
@@ -96,7 +96,7 @@ class MontadoraSeeder extends Seeder
         Veiculo::create([
             'numero_portas' => 4,
             'cor' => 'Prata',
-            'fabricante' => 'Volkesvagem',
+            'fabricante' => 'Volkswagen',
             'ano_modelo' => 2019,
             'ano_fabricacao' => 2019,
             'placa' => strtoupper(fake()->bothify('???-#?##')),
