@@ -13,8 +13,7 @@
                     <th scope="col">CNPJ</th>
                     <th scope="col">E-mail</th>
                     <th scope="col">Telefone</th>
-                    <th scope="col">Local</th>
-                    <th scope="col">Opções</th>
+                    <th scope="col" style="width: 320px">Opções</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,12 +24,9 @@
                         <td>{{ $locadora->razao_social }}</td>
                         <td>{{ $locadora->cnpj }}</td>
                         <td>{{ $locadora->email }}</td>
-                        <td>{{ $locadora->telefone }}</td>
+                        <td>{{ $locadora->telefone }}</td>                        
                         <td>
-                            {{ $locadora->endereco->rua }}, {{ $locadora->endereco->numero }} - {{ $locadora->endereco->bairro }}<br />
-                            {{ $locadora->endereco->cidade }} / {{ $locadora->endereco->estado }} ({{ $locadora->endereco->cep }})
-                        </td>
-                        <td>
+                            <x-button type="link" route="{{ route('locadora.veiculos', $locadora->id) }}" name="Veículos" primary></x-button>
                             <x-button type="link" route="{{ route('locadoras.show', $locadora->id) }}" name="Show" green></x-button>
                             <x-button type="link" route="{{ route('locadoras.edit', $locadora->id) }}" name="Editar" yellow></x-button>
                             <x-button type="link" route="{{ route('locadora.delete', $locadora->id) }}" name="Excluir" red></x-button>                            

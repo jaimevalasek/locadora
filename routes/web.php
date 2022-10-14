@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LocadoraController;
+use App\Http\Controllers\LocadoraVeiculoController;
 use App\Http\Controllers\ModeloController;
 use App\Http\Controllers\MontadoraController;
 use App\Http\Controllers\VeiculoController;
@@ -23,6 +24,13 @@ Route::get('/', function () {
 });
 
 Route::get('locadora/delete/{id}', [LocadoraController::class, 'delete'])->name('locadora.delete');
+Route::get('locadora/veiculos/{locadora}', [LocadoraController::class, 'veiculos'])->name('locadora.veiculos');
+Route::get('locadora/veiculo/{locadora}', [LocadoraController::class, 'veiculo'])->name('locadora.veiculo');
+Route::post('locadora/veiculo-locadora/{locadora}', [LocadoraController::class, 'veiculoAttach'])->name('locadora.veiculo-attach');
+Route::get('locadora/veiculo-locadora-delete/{locadora}', [LocadoraController::class, 'veiculoDetach'])->name('locadora.veiculo-detach');
+
+Route::get('relatorio/locadora-veiculos', [LocadoraVeiculoController::class, 'index'])->name('relatorio.locadora-veiculo');
+
 Route::resource('locadoras', LocadoraController::class)
     ->only('index', 'show', 'create', 'edit', 'store', 'update');
 

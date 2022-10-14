@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LocadoraRequest;
 use App\Models\Endereco;
 use App\Models\Locadora;
+use App\Models\Veiculo;
 use Illuminate\Http\Request;
 
 class LocadoraController extends Controller
@@ -23,6 +24,70 @@ class LocadoraController extends Controller
         return view('locadoras.show', [
             'locadora' => $locadora
         ]);
+    }
+
+    public function veiculos(Locadora $locadora)
+    {
+        $veiculos = Veiculo::query()
+            ->join('locadora_veiculos', 'veiculos.id', 'locadora_veiculos.veiculo_id')
+            ->where('locadora_veiculos.locadora_id', '=', $locadora->id)
+            ->paginate();
+
+        return view('locadoras.veiculos', [
+            'veiculos' => $veiculos,
+            'locadora' => $locadora,
+        ]);
+    }
+
+    public function veiculo(Locadora $locadora)
+    {
+        $veiculos = Veiculo::get();
+
+        return view('locadoras.veiculo', [
+            'locadora' => $locadora,
+            'veiculos' => $veiculos,
+        ]);
+    }
+
+    public function veiculoAttach(Request $request, $id)
+    {
+        $request->validate([
+            'veiculo_id'     => ['required', 'integer'],
+        ]);
+
+        $veiculo = Veiculo::query()
+            ->join('locadora_veiculos', 'veiculos.id', 'locadora_veiculos.veiculo_id')
+            ->where('locadora_veiculos.veiculo_id', '=', $request->veiculo_id)
+            ->first();
+
+        if (!$veiculo) {
+            $locadora = Locadora::find($id);
+            $veiculo = Veiculo::find($request->veiculo_id);
+
+            $locadora->veiculos()->attach($veiculo);
+            
+            return redirect()->to(route('locadora.veiculos', $id))->with('success', "Veículo adicionado a locadora com sucesso!.");
+        }
+
+        return redirect()->to(route('locadora.veiculos', $id))->with('info', "O veículo já adicionado a uma locadora!.");
+    }
+
+    public function veiculoDetach($id)
+    {
+        $temVeiculo = Veiculo::query()
+            ->join('locadora_veiculos', 'veiculos.id', 'locadora_veiculos.veiculo_id')
+            ->where('locadora_veiculos.veiculo_id', '=', $id)
+            ->first();
+
+        if ($temVeiculo) {
+            $veiculo = Veiculo::find($id);
+
+            $veiculo->locadora()->detach();
+            
+            return redirect()->back()->with('success', "Veículo foi removido da locadora com sucesso!.");
+        }
+
+        return redirect()->back()->with('error', "O veículo não existe na uma locadora!.");
     }
 
     public function create()
