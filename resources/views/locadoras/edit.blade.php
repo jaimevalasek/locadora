@@ -23,7 +23,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row pt-4">
                     <div class="col-3">
                         <x:input.text name="cep" id="cep" label="CEP" placeholder="CEP" value="{{ old('cep', $locadora->endereco->cep) }}" />
                     </div>

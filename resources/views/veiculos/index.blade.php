@@ -34,6 +34,7 @@
                         <td>{{ $veiculo->ano_modelo }}</td>
                         <td>{{ $veiculo->ano_fabricacao }}</td>
                         <td>
+                            <x-button type="link" route="{{ route('veiculo.logs', $veiculo->id) }}" name="Logs" gray></x-button>
                             <x-button type="link" route="{{ route('veiculos.show', $veiculo->id) }}" name="Show" green></x-button>
                             <x-button type="link" route="{{ route('veiculos.edit', $veiculo->id) }}" name="Editar" yellow></x-button>
                             <x-button type="link" route="{{ route('veiculo.delete', $veiculo->id) }}" name="Excluir" red></x-button>

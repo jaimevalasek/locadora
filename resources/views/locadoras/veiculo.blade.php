@@ -10,7 +10,7 @@
                                 <option value="{{ $veiculo->id }}"
                                     @if (old('veiculo_id') == $veiculo->id)
                                         @selected(true)
-                                    @endif>Modelo: {{ $veiculo->modelo->nome }} Placa: {{ $veiculo->placa }}, Chass: {{ $veiculo->chassi }}</option>
+                                    @endif>Modelo: {{ $veiculo->nome }} Placa: {{ $veiculo->placa }}</option>
                             @endforeach
                         </select>
                         @if ($errors->has('veiculo_id'))
@@ -19,9 +19,9 @@
                     </div>  
                 </div>                                  
 
-                <div class="row">
+                <div class="row pt-4">
                     <div class="col-6">
-                        <x-button style="width:100%;" type="link" route="{{ route('veiculos.index') }}" name="Voltar" primary></x-button>
+                        <x-button style="width:100%;" type="link" route="{{ route('locadora.veiculos', $locadora->id) }}" name="Voltar" primary></x-button>
                     </div>
                     <div class="col-6">
                         <x-button style="width:100%;" type="submit" name="Cadastrar" primary></x-button>

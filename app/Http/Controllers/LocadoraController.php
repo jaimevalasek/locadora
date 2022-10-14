@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\CalculateDatabaseResults;
+use App\Facades\CalculateDatabaseResultsFacade;
 use App\Http\Requests\LocadoraRequest;
 use App\Models\Endereco;
 use App\Models\Locadora;
 use App\Models\Veiculo;
 use App\Models\VeiculoLog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LocadoraController extends Controller
 {
@@ -42,7 +45,15 @@ class LocadoraController extends Controller
 
     public function veiculo(Locadora $locadora)
     {
-        $veiculos = Veiculo::get();
+        $locadoraVeiculos = CalculateDatabaseResultsFacade::getVeiculosWhereNotIn(
+            DB::table('locadora_veiculos')->select('veiculo_id')->get()->toArray()
+        );
+       
+        $veiculos = Veiculo::query()
+        ->join('modelos', 'veiculos.modelo_id', 'modelos.id')
+        ->select('veiculos.id', 'veiculos.placa', 'modelos.nome')
+        ->whereNotIn('veiculos.id', $locadoraVeiculos)
+        ->get();
 
         return view('locadoras.veiculo', [
             'locadora' => $locadora,
@@ -69,7 +80,6 @@ class LocadoraController extends Controller
 
             $veiculoLogUpdate = VeiculoLog::query()
                 ->where('veiculo_id', '=', $veiculo->id)
-                ->where('locadora_id', '=', $id)
                 ->whereNull('data_fim')
                 ->first();
 
@@ -114,22 +124,13 @@ class LocadoraController extends Controller
                 ->whereNull('data_fim')
                 ->first();
 
-                //dd($veiculoLogUpdate);
             if ($veiculoLogUpdate) {
                 $veiculoLogUpdate->update([
                     'data_fim' => \Carbon\Carbon::now(),
                 ]);
     
                 $veiculoLogUpdate->save();
-            }
-
-            VeiculoLog::create([
-                'modelo' => $veiculo->modelo->nome,
-                'montadora' => $veiculo->modelo->montadora->nome,
-                'data_inicio' => \Carbon\Carbon::now(),
-                'veiculo_id' => $veiculo->id,
-                'locadora_id' => $locadora_id,
-            ]);
+            }            
 
             return redirect()->back()->with('success', "Veículo foi removido da locadora com sucesso!.");
         }
@@ -192,8 +193,12 @@ class LocadoraController extends Controller
 
     public function delete($id)
     {
-        if (!$locadora = Locadora::find($id)) {
-            return redirect()->to(route('locadoras.index'))->with('error', 'Não foi possível localizar a locadora para excluir!.');
+        $verificacaoEstoque = DB::table('locadora_veiculos')->select('veiculo_id')->where('locadora_id', '=', $id)->first();
+        
+        $locadora = Locadora::find($id);
+
+        if ($verificacaoEstoque) {
+            return redirect()->to(route('locadoras.index'))->with('error', 'Não foi possível excluir a locadora porque ela tem carros cadastrados!.');
         }
 
         $success = "Locadora {$locadora->razao_social} excluida com sucesso!.";

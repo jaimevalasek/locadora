@@ -42,7 +42,7 @@
                     </div>                
                 </div>    
                 
-                <div class="row">
+                <div class="row pt-4">
                     <div class="col-6">
                         <x-button style="width:100%;" type="link" route="{{ route('veiculos.index') }}" name="Voltar" primary></x-button>
                     </div>

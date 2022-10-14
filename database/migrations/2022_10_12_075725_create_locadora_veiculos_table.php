@@ -19,10 +19,7 @@ return new class extends Migration
                 ->constrained('locadoras')
                 ->onDelete('CASCADE')
                 ->onUpdate('CASCADE');
-            $table->foreignId('veiculo_id')
-                ->constrained('veiculos')
-                ->onDelete('CASCADE')
-                ->onUpdate('CASCADE');
+            $table->foreignId('veiculo_id')->constrained('veiculos');
         });
     }
 

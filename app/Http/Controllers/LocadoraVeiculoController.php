@@ -12,7 +12,7 @@ class LocadoraVeiculoController extends Controller
 {
     public function index(Request $request)
     {
-        $modelos = Modelo::get();
+        $modelos = Modelo::query();
 
         $locadoraVeiculos = Veiculo::query()
             ->join('locadora_veiculos', 'veiculos.id', 'locadora_veiculos.veiculo_id')
@@ -20,19 +20,13 @@ class LocadoraVeiculoController extends Controller
             ->join('modelos', 'veiculos.modelo_id', 'modelos.id')
             ->select('veiculos.placa', 'veiculos.created_at', 'locadoras.nome_fantasia', 'modelos.nome')
             ->when($request->locadora, function($query, $val) {
-                if ($val) {
-                    $query->where('locadoras.nome_fantasia', 'like', '%' . $val . '%');
-                }
+                $query->where('locadoras.nome_fantasia', 'like', '%' . $val . '%');
             })->when($request->data, function($query, $val) {
-                if ($val) {
-                    $val = \Carbon\Carbon::createFromFormat('d/m/Y', $val, 'UTC')->format('Y-m-d');
-                    $query->whereDate('veiculos.created_at', '>=', $val . ' 00:00:00')
+                $val = \Carbon\Carbon::createFromFormat('d/m/Y', $val, 'UTC')->format('Y-m-d');
+                $query->whereDate('veiculos.created_at', '>=', $val . ' 00:00:00')
                     ->whereDate('veiculos.created_at', '<=', $val . ' 23:59:59');
-                }
             })->when($request->modelo, function($query, $val) {
-                if ($val) {
-                    $query->where('veiculos.modelo_id', '=', $val);
-                }
+                $query->where('veiculos.modelo_id', '=', $val);
             })->paginate();
             
         return view('locadora-veiculos.index', [

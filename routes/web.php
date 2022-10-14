@@ -30,6 +30,7 @@ Route::post('locadora/veiculo-locadora/{locadora}', [LocadoraController::class, 
 Route::get('locadora/veiculo-locadora-delete/{locadora}', [LocadoraController::class, 'veiculoDetach'])->name('locadora.veiculo-detach');
 
 Route::get('relatorio/locadora-veiculos', [LocadoraVeiculoController::class, 'index'])->name('relatorio.locadora-veiculo');
+Route::get('veiculo/logs/{id}', [VeiculoController::class, 'logs'])->name('veiculo.logs');
 
 Route::resource('locadoras', LocadoraController::class)
     ->only('index', 'show', 'create', 'edit', 'store', 'update');

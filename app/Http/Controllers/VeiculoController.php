@@ -6,6 +6,7 @@ use App\Http\Requests\VeiculoRequest;
 use App\Models\Modelo;
 use App\Models\Montadora;
 use App\Models\Veiculo;
+use App\Models\VeiculoLog;
 use Illuminate\Http\Request;
 
 class VeiculoController extends Controller
@@ -34,6 +35,28 @@ class VeiculoController extends Controller
 
         return view('veiculos.show', [
             'veiculo' => $veiculo
+        ]);
+    }
+
+    public function logs($id)
+    {
+        $logs = VeiculoLog::query()
+            ->join('veiculos', 'veiculo_logs.veiculo_id', 'veiculos.id')
+            ->join('locadoras', 'veiculo_logs.locadora_id', 'locadoras.id')
+            ->join('modelos', 'veiculos.modelo_id', 'modelos.id')
+            ->select(
+                'veiculo_logs.*', 
+                'veiculos.cor', 
+                'veiculos.ano_modelo', 
+                'veiculos.placa',
+                'veiculos.chassi',
+                'modelos.nome as modelo',
+                'locadoras.nome_fantasia as locadora'
+            )->where('veiculo_logs.veiculo_id', '=', $id)
+            ->paginate();
+            
+        return view('veiculos.logs', [
+            'logs' => $logs
         ]);
     }
 
