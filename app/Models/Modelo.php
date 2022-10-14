@@ -13,4 +13,9 @@ class Modelo extends Model
         'nome',
         'montadora_id'
     ];
+
+    public function montadora()
+    {
+        return $this->hasOne(Montadora::class, 'id', 'montadora_id');
+    }
 }

@@ -6,6 +6,7 @@ use App\Http\Requests\LocadoraRequest;
 use App\Models\Endereco;
 use App\Models\Locadora;
 use App\Models\Veiculo;
+use App\Models\VeiculoLog;
 use Illuminate\Http\Request;
 
 class LocadoraController extends Controller
@@ -65,6 +66,28 @@ class LocadoraController extends Controller
             $veiculo = Veiculo::find($request->veiculo_id);
 
             $locadora->veiculos()->attach($veiculo);
+
+            $veiculoLogUpdate = VeiculoLog::query()
+                ->where('veiculo_id', '=', $veiculo->id)
+                ->where('locadora_id', '=', $id)
+                ->whereNull('data_fim')
+                ->first();
+
+            if ($veiculoLogUpdate) {
+                $veiculoLogUpdate->update([
+                    'data_fim' => \Carbon\Carbon::now(),
+                ]);
+    
+                $veiculoLogUpdate->save();
+            }
+
+            VeiculoLog::create([
+                'modelo' => $veiculo->modelo->nome,
+                'montadora' => $veiculo->modelo->montadora->nome,
+                'data_inicio' => \Carbon\Carbon::now(),
+                'veiculo_id' => $veiculo->id,
+                'locadora_id' => $locadora->id,
+            ]);
             
             return redirect()->to(route('locadora.veiculos', $id))->with('success', "Veículo adicionado a locadora com sucesso!.");
         }
@@ -81,9 +104,33 @@ class LocadoraController extends Controller
 
         if ($temVeiculo) {
             $veiculo = Veiculo::find($id);
+            $locadora_id = $veiculo->locadora[0]->id;
 
             $veiculo->locadora()->detach();
-            
+
+            $veiculoLogUpdate = VeiculoLog::query()
+                ->where('veiculo_id', '=', $veiculo->id)
+                ->where('locadora_id', '=', $locadora_id)
+                ->whereNull('data_fim')
+                ->first();
+
+                //dd($veiculoLogUpdate);
+            if ($veiculoLogUpdate) {
+                $veiculoLogUpdate->update([
+                    'data_fim' => \Carbon\Carbon::now(),
+                ]);
+    
+                $veiculoLogUpdate->save();
+            }
+
+            VeiculoLog::create([
+                'modelo' => $veiculo->modelo->nome,
+                'montadora' => $veiculo->modelo->montadora->nome,
+                'data_inicio' => \Carbon\Carbon::now(),
+                'veiculo_id' => $veiculo->id,
+                'locadora_id' => $locadora_id,
+            ]);
+
             return redirect()->back()->with('success', "Veículo foi removido da locadora com sucesso!.");
         }
 
