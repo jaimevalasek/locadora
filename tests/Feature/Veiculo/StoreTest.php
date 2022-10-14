@@ -34,12 +34,12 @@ class StoreTest extends TestCase
         ];
 
         
-        $veiculo = Veiculo::factory()->create($dados);
+        Veiculo::factory()->create($dados);
 
-        $this->post(route('veiculos.store'), $veiculo->toArray())
+        $this->post(route('veiculos.store'), $dados)
             ->assertSessionHasErrors([
-                'placa' => trans('validation.unique', ['attribute' => 'placa']),
-                'chassi' => trans('validation.unique', ['attribute' => 'chassi']),
+                'placa' => 'Já tem um carro cadastrado com esta placa',
+                'chassi' => 'Já tem um carro cadastrado com este chassi',
             ]);
 
         

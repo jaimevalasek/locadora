@@ -29,8 +29,8 @@ class VeiculoRequest extends FormRequest
             'fabricante' => 'required|string|max:50',
             'ano_modelo' => 'required|integer',
             'ano_fabricacao' => 'required|integer',
-            'placa' => 'required|max:8|unique:veiculos,placa,' . $this->veiculo,
-            'chassi' => 'required|unique:veiculos,chassi,' . $this->veiculo,
+            'placa' => 'required|max:8|unique:veiculos,placa,' . $this->veiculo . ',id',
+            'chassi' => 'required|unique:veiculos,chassi,' . $this->veiculo. ',id',
             'modelo_id' => 'required|integer'
         ];
     }

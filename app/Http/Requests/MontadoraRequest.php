@@ -24,7 +24,7 @@ class MontadoraRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome' => 'required|unique:montadoras,nome,' . $this->montadora
+            'nome' => 'required|unique:montadoras,nome,' . $this->montadora . ',id',
         ];
     }
 

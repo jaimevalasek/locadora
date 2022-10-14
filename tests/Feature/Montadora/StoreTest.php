@@ -22,7 +22,7 @@ class StoreTest extends TestCase
 
         $this->post(route('montadoras.store'), $dados)
             ->assertSessionHasErrors([
-                'nome' => trans('validation.unique', ['attribute' => 'nome'])
+                'nome' => 'O nome dessa montadora já está cadastrado.'
             ]);
 
         
