@@ -22,8 +22,6 @@ class LocadoraFactory extends Factory
             'cnpj' => fake()->numerify('##.###.###/0001-##'),
             'email' => fake()->email(),
             'telefone' => fake()->numerify('(##) #####-####'),
-            'cidade' => fake()->city(),
-            'estado' => 'SP'
         ];
     }
 }

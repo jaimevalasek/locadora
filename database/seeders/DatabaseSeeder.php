@@ -24,7 +24,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             LocadoraSeeder::class,
-            MontadoraSeeder::class
+            MontadoraSeeder::class,
+            VeiculoLogSeeder::class,
         ]);
     }
 }

@@ -17,7 +17,10 @@ return new class extends Migration
         Schema::create('modelos', function (Blueprint $table) {
             $table->id();
             $table->string('nome')->unique();
-            $table->foreignIdFor(Montadora::class)->constrained();
+            $table->foreignIdFor(Montadora::class)
+                ->constrained()
+                ->onDelete('CASCADE')
+                ->onUpdate('CASCADE');
             $table->timestamps();
         });
     }

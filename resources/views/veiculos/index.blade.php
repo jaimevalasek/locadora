@@ -1,4 +1,8 @@
 <x-layout>
+    <x-alert />
+    <div class="position-relative overflow-hidden p-3 p-md-2 m-md-1 text-center bg-light">
+        <x-button type="link" route="{{ route('veiculos.create') }}" name="Novo Veículo" green></x-button>
+    </div>
     <div class="position-relative overflow-hidden p-3 p-md-2 m-md-1 text-center bg-light">
         <table class="table">
             <thead class="thead-light">
@@ -31,11 +35,13 @@
                         <td>{{ $veiculo->ano_fabricacao }}</td>
                         <td>
                             <x-button type="link" route="{{ route('veiculos.show', $veiculo->id) }}" name="Show" green></x-button>
+                            <x-button type="link" route="{{ route('veiculos.edit', $veiculo->id) }}" name="Editar" yellow></x-button>
+                            <x-button type="link" route="{{ route('veiculo.delete', $veiculo->id) }}" name="Excluir" red></x-button>
                         </td>
                     </tr>                    
                 @empty
                     <tr>
-                        <th colspan="8">Nenhum registro!</th>
+                        <th colspan="11">Nenhum registro!</th>
                     </tr>
                 @endforelse
             </tbody>

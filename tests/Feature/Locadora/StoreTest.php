@@ -20,11 +20,21 @@ class StoreTest extends TestCase
             'cnpj' => '04.147.499/0001-90',
             'email' => 'sporer.danial@schuppe.org',
             'telefone' => fake()->numerify('(##) #####-####'),
-            'cidade' => 'Curitiba',
-            'estado' => 'PR'
+            'rua' => 'Rua madagascar',
+            'numero' => '469',
+            'bairro' => 'Nações',
+            'cidade' => 'Fazenda Rio Grande',
+            'estado' => 'Parana',
+            'cep' => '83823-273',
         ];
 
-        Locadora::factory()->create($dados);
+        Locadora::factory()->create([
+            'nome_fantasia' => $dados['nome_fantasia'],
+            'razao_social' => $dados['razao_social'],
+            'cnpj' => $dados['cnpj'],
+            'email' => $dados['email'],
+            'telefone' => $dados['telefone'],
+        ]);
 
         $this->post(route('locadoras.store'), $dados)
             ->assertSessionHasErrors([

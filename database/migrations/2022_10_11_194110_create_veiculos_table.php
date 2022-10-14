@@ -23,7 +23,10 @@ return new class extends Migration
             $table->smallInteger('ano_fabricacao');
             $table->string('placa', 8)->unique();
             $table->string('chassi', 30)->unique();
-            $table->foreignIdFor(Modelo::class)->constrained();
+            $table->foreignIdFor(Modelo::class)
+                ->constrained()
+                ->onDelete('CASCADE')
+                ->onUpdate('CASCADE');
             $table->timestamps();
         });
     }

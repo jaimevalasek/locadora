@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class MontadoraRequest extends FormRequest
+class ModeloRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,15 +24,8 @@ class MontadoraRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome' => 'required|unique:montadoras,nome,' . $this->montadora
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'nome.required' => 'O nome da montadora é obrigatório.',
-            'nome.unique' => 'O nome dessa montadora já está cadastrado.',
+            'nome' => 'required|unique:modelos,nome,' . $this->modelo,
+            'montadora_id' => 'required',
         ];
     }
 }

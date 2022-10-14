@@ -1,4 +1,8 @@
 <x-layout>
+    <x-alert />
+    <div class="position-relative overflow-hidden p-3 p-md-2 m-md-1 text-center bg-light">
+        <x-button type="link" route="{{ route('modelos.create') }}" name="Novo Modelo" green></x-button>
+    </div>
     <div class="position-relative overflow-hidden p-3 p-md-2 m-md-1 text-center bg-light">
         <table class="table">
             <thead class="thead-light">
@@ -17,6 +21,8 @@
                         <td>{{ $modelo->nome }}</td>
                         <td>
                             <x-button type="link" route="{{ route('modelos.show', $modelo->id) }}" name="Show" green></x-button>
+                            <x-button type="link" route="{{ route('modelos.edit', $modelo->id) }}" name="Editar" yellow></x-button>
+                            <x-button type="link" route="{{ route('modelo.delete', $modelo->id) }}" name="Excluir" red></x-button>
                         </td>
                     </tr>                    
                 @empty

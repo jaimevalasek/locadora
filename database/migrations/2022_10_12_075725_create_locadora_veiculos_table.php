@@ -14,8 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('locadora_veiculos', function (Blueprint $table) {
-            $table->foreignId('locadora_id')->constrained('locadoras');
-            $table->foreignId('veiculo_id')->constrained('veiculos');
+            $table->index(['locadora_id', 'veiculo_id']);
+            $table->foreignId('locadora_id')
+                ->constrained('locadoras')
+                ->onDelete('CASCADE')
+                ->onUpdate('CASCADE');
+            $table->foreignId('veiculo_id')
+                ->constrained('veiculos')
+                ->onDelete('CASCADE')
+                ->onUpdate('CASCADE');
         });
     }
 

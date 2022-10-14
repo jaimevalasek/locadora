@@ -1,4 +1,8 @@
 <x-layout>
+    <x-alert />
+    <div class="position-relative overflow-hidden p-3 p-md-2 m-md-1 text-center bg-light">
+        <x-button type="link" route="{{ route('locadoras.create') }}" name="Nova Locadora" green></x-button>
+    </div>
     <div class="position-relative overflow-hidden p-3 p-md-2 m-md-1 text-center bg-light">
         <table class="table">
             <thead class="thead-light">
@@ -22,11 +26,14 @@
                         <td>{{ $locadora->cnpj }}</td>
                         <td>{{ $locadora->email }}</td>
                         <td>{{ $locadora->telefone }}</td>
-                        <td>{{ $locadora->cidade }}</td>
-                        <td>{{ $locadora->estado }}</td>
+                        <td>
+                            {{ $locadora->endereco->rua }}, {{ $locadora->endereco->numero }} - {{ $locadora->endereco->bairro }}<br />
+                            {{ $locadora->endereco->cidade }} / {{ $locadora->endereco->estado }} ({{ $locadora->endereco->cep }})
+                        </td>
                         <td>
                             <x-button type="link" route="{{ route('locadoras.show', $locadora->id) }}" name="Show" green></x-button>
                             <x-button type="link" route="{{ route('locadoras.edit', $locadora->id) }}" name="Editar" yellow></x-button>
+                            <x-button type="link" route="{{ route('locadora.delete', $locadora->id) }}" name="Excluir" red></x-button>                            
                         </td>
                     </tr>                    
                 @empty

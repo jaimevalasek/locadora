@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class LocadoraRequest extends FormRequest
 {
@@ -26,11 +27,17 @@ class LocadoraRequest extends FormRequest
         return [
             'nome_fantasia' => 'required',
             'razao_social' => 'required',
-            'cnpj' => 'required|unique:locadoras,cnpj',
+            'cnpj' => 'required|unique:locadoras,cnpj,' . $this->locadora . ',id',
+            //'cnpj' => 'required', 'unique:locadoras,cnpj,' . $this->locadora,
             'email' => 'required|email',
             'telefone' => 'required',
+            'rua' => 'required',
+            'numero' => 'required',
+            'bairro' => 'required',
             'cidade' => 'required',
             'estado' => 'required',
+            'cep' => 'required',
         ];
+
     }
 }

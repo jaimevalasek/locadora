@@ -1,4 +1,8 @@
 <x-layout>
+    <x-alert />
+    <div class="position-relative overflow-hidden p-3 p-md-2 m-md-1 text-center bg-light">
+        <x-button type="link" route="{{ route('montadoras.create') }}" name="Nova Montadora" green></x-button>
+    </div>
     <div class="position-relative overflow-hidden p-3 p-md-2 m-md-1 text-center bg-light">
         <table class="table">
             <thead class="thead-light">
@@ -15,6 +19,8 @@
                         <td>{{ $montadora->nome }}</td>
                         <td>
                             <x-button type="link" route="{{ route('montadoras.show', $montadora->id) }}" name="Show" green></x-button>
+                            <x-button type="link" route="{{ route('montadoras.edit', $montadora->id) }}" name="Editar" yellow></x-button>
+                            <x-button type="link" route="{{ route('montadora.delete', $montadora->id) }}" name="Deletar" red></x-button>
                         </td>
                     </tr>                    
                 @empty

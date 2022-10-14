@@ -13,16 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('locadora_modelos', function (Blueprint $table) {
-            $table->index(['locadora_id', 'modelo_id']);
+        Schema::create('enderecos', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('locadora_id')
                 ->constrained('locadoras')
                 ->onDelete('CASCADE')
                 ->onUpdate('CASCADE');
-            $table->foreignId('modelo_id')
-                ->constrained('modelos')
-                ->onDelete('CASCADE')
-                ->onUpdate('CASCADE');
+            $table->string('cep');
+            $table->string('rua');
+            $table->string('numero');
+            $table->string('bairro');
+            $table->string('cidade');
+            $table->string('estado');
+            $table->timestamps();
         });
     }
 
@@ -33,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('locadora_modelos');
+        Schema::dropIfExists('enderecos');
     }
 };

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Locadora;
 use App\Models\Veiculo;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
