@@ -8,7 +8,7 @@
                 </div>
                 <div class="col-3">
                     <select name="modelo" class="form-control">
-                        <option value="">Selecione a montadora</option>
+                        <option value="">Selecione o modelo</option>
                         @foreach ($modelos as $modelo)
                             <option value="{{ $modelo->id }}"
                                 @if (request()->modelo == $modelo->id)

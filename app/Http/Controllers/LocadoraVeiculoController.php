@@ -12,7 +12,7 @@ class LocadoraVeiculoController extends Controller
 {
     public function index(Request $request)
     {
-        $modelos = Modelo::query();
+        $modelos = Modelo::get();
 
         $locadoraVeiculos = Veiculo::query()
             ->join('locadora_veiculos', 'veiculos.id', 'locadora_veiculos.veiculo_id')
