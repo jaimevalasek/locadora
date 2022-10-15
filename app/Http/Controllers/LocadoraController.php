@@ -187,6 +187,20 @@ class LocadoraController extends Controller
             'email' => $validated['email'],
             'telefone' => $validated['telefone'],
         ]);
+
+        $endereco = Endereco::query()
+            ->where('locadora_id', '=', $id)->first();
+
+        $endereco->update([
+            'cep' => $validated['cep'],
+            'rua' => $validated['rua'],
+            'numero' => $validated['numero'],
+            'bairro' => $validated['bairro'],
+            'cidade' => $validated['cidade'],
+            'estado' => $validated['estado'],
+        ]);
+
+        $endereco->save();
         
         return redirect()->to(route('locadoras.index'))->with('success', 'Locadora atualizada com sucesso!.');
     }
