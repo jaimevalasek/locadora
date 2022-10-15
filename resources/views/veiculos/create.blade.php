@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-12">
                         <select name="modelo_id" class="form-control">
-                            <option>Selecione a montadora</option>
+                            <option>Selecione a modelo</option>
                             @foreach ($modelos as $modelo)
                                 <option value="{{ $modelo->id }}"
                                     @if (old('modelo_id') == $modelo->id)

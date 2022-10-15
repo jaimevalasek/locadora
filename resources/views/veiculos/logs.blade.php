@@ -24,8 +24,8 @@
                         <td>{{ $log->modelo }}</td>
                         <td>{{ $log->montadora }}</td>
                         <td>{{ $log->placa }} {{ $log->cor }} {{ $log->ano_modelo }}</td>
-                        <td>{{ $log->data_inicio }}</td>
-                        <td>{{ $log->data_fim ?? "Atualmente" }}</td>                        
+                        <td><x-carbon data="{{ $log->data_inicio }}" format="d/m/Y H:i" isoFormat="lll"/></td>
+                        <td><x-carbon data="{{ $log->data_fim }}" format="d/m/Y H:i" tipo="diffForHumans"/></td>                        
                     </tr>                    
                 @empty
                     <tr>

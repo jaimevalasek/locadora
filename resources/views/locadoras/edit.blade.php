@@ -47,7 +47,7 @@
                     </div>
                 </div>
                 
-                <div class="row">
+                <div class="row mt-4">
                     <div class="col-6">
                         <x-button style="width:100%;" type="link" route="{{ route('locadoras.index') }}" name="Voltar" primary></x-button>
                     </div>

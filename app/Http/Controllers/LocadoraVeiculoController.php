@@ -18,7 +18,8 @@ class LocadoraVeiculoController extends Controller
             ->join('locadora_veiculos', 'veiculos.id', 'locadora_veiculos.veiculo_id')
             ->join('locadoras', 'locadora_veiculos.locadora_id', 'locadoras.id')
             ->join('modelos', 'veiculos.modelo_id', 'modelos.id')
-            ->select('veiculos.placa', 'veiculos.created_at', 'locadoras.nome_fantasia', 'modelos.nome')
+            ->join('montadoras', 'modelos.montadora_id', 'montadoras.id')
+            ->select('veiculos.placa', 'veiculos.created_at', 'locadoras.nome_fantasia', 'modelos.nome', 'montadoras.nome as montadora')
             ->when($request->locadora, function($query, $val) {
                 $query->where('locadoras.nome_fantasia', 'like', '%' . $val . '%');
             })->when($request->data, function($query, $val) {

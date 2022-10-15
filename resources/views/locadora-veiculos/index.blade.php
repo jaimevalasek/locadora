@@ -1,7 +1,7 @@
 <x-layout>
     <x-alert />
     <div class="position-relative overflow-hidden p-3 p-md-2 m-md-1 text-center bg-light">
-        <form action="{{ route('relatorio.locadora-veiculo') }}">
+        <form action="{{ route('relatorio.locadora-veiculos') }}">
             <div class="row">
                 <div class="col-3">
                     <x:input.text name="locadora" id="locadora" placeholder="Locadora" value="{{ request()->locadora }}"/>
@@ -40,9 +40,9 @@
                 @forelse ($locadoraVeiculos as $locadoraVeiculo)
                     <tr>
                         <td>{{ $locadoraVeiculo->nome_fantasia }}</td>
-                        <td>{{ $locadoraVeiculo->nome }}</td>
+                        <td>{{ $locadoraVeiculo->montadora }} &rsaquo; {{ $locadoraVeiculo->nome }}</td>
                         <td>{{ $locadoraVeiculo->placa }}</td>
-                        <td>{{ \Carbon\Carbon::parse($locadoraVeiculo->created_at)->format('d/m/Y') }}</td>                        
+                        <td><x-carbon data="{{ $locadoraVeiculo->created_at }}"/></td>                        
                     </tr>                    
                 @empty
                     <tr>

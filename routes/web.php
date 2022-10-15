@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LocadoraController;
+use App\Http\Controllers\LocadoraModeloController;
 use App\Http\Controllers\LocadoraVeiculoController;
 use App\Http\Controllers\ModeloController;
 use App\Http\Controllers\MontadoraController;
@@ -20,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->to(route('locadoras.index'));
 });
 
 Route::get('locadora/delete/{id}', [LocadoraController::class, 'delete'])->name('locadora.delete');
@@ -29,7 +30,8 @@ Route::get('locadora/veiculo/{locadora}', [LocadoraController::class, 'veiculo']
 Route::post('locadora/veiculo-locadora/{locadora}', [LocadoraController::class, 'veiculoAttach'])->name('locadora.veiculo-attach');
 Route::get('locadora/veiculo-locadora-delete/{locadora}', [LocadoraController::class, 'veiculoDetach'])->name('locadora.veiculo-detach');
 
-Route::get('relatorio/locadora-veiculos', [LocadoraVeiculoController::class, 'index'])->name('relatorio.locadora-veiculo');
+Route::get('relatorio/locadora-veiculos', [LocadoraVeiculoController::class, 'index'])->name('relatorio.locadora-veiculos');
+Route::get('relatorio/locadora-modelos', [LocadoraModeloController::class, 'index'])->name('relatorio.locadora-modelos');
 Route::get('veiculo/logs/{id}', [VeiculoController::class, 'logs'])->name('veiculo.logs');
 
 Route::resource('locadoras', LocadoraController::class)
