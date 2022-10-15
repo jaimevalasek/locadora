@@ -16,7 +16,7 @@
                     <th scope="col">Portas</th>
                     <th scope="col">Ano do modelo</th>
                     <th scope="col">Ano de fabricação</th>
-                    <th scope="col">opções</th>
+                    <th scope="col" style="width: 200px">opções</th>
                 </tr>
             </thead>
             <tbody>

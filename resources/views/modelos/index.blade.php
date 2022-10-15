@@ -10,7 +10,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Montadora</th>
                     <th scope="col">Modelo</th>
-                    <th scope="col">opções</th>
+                    <th scope="col" style="width: 250px">opções</th>
                 </tr>
             </thead>
             <tbody>

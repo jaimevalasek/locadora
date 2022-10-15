@@ -9,7 +9,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nome</th>
-                    <th scope="col">opções</th>
+                    <th scope="col" style="width: 250px">opções</th>
                 </tr>
             </thead>
             <tbody>
